@@ -28,13 +28,116 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.label_height = new System.Windows.Forms.Label();
+            this.label_weight = new System.Windows.Forms.Label();
+            this.txtbox_height = new System.Windows.Forms.TextBox();
+            this.txtbox_weight = new System.Windows.Forms.TextBox();
+            this.button_calculate = new System.Windows.Forms.Button();
+            this.richTextBox_show_result = new System.Windows.Forms.RichTextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // label_height
+            // 
+            this.label_height.AutoSize = true;
+            this.label_height.Location = new System.Drawing.Point(88, 34);
+            this.label_height.Name = "label_height";
+            this.label_height.Size = new System.Drawing.Size(58, 15);
+            this.label_height.TabIndex = 0;
+            this.label_height.Text = "身高(m)";
+            // 
+            // label_weight
+            // 
+            this.label_weight.AutoSize = true;
+            this.label_weight.Location = new System.Drawing.Point(91, 82);
+            this.label_weight.Name = "label_weight";
+            this.label_weight.Size = new System.Drawing.Size(61, 15);
+            this.label_weight.TabIndex = 1;
+            this.label_weight.Text = "體重(kg)";
+            // 
+            // txtbox_height
+            // 
+            this.txtbox_height.Location = new System.Drawing.Point(163, 31);
+            this.txtbox_height.Name = "txtbox_height";
+            this.txtbox_height.Size = new System.Drawing.Size(100, 25);
+            this.txtbox_height.TabIndex = 2;
+            // 
+            // txtbox_weight
+            // 
+            this.txtbox_weight.Location = new System.Drawing.Point(163, 79);
+            this.txtbox_weight.Name = "txtbox_weight";
+            this.txtbox_weight.Size = new System.Drawing.Size(100, 25);
+            this.txtbox_weight.TabIndex = 3;
+            // 
+            // button_calculate
+            // 
+            this.button_calculate.Location = new System.Drawing.Point(311, 31);
+            this.button_calculate.Name = "button_calculate";
+            this.button_calculate.Size = new System.Drawing.Size(93, 78);
+            this.button_calculate.TabIndex = 4;
+            this.button_calculate.Text = "計算";
+            this.button_calculate.UseVisualStyleBackColor = true;
+            this.button_calculate.Click += new System.EventHandler(this.button_calculate_Click);
+            // 
+            // richTextBox_show_result
+            // 
+            this.richTextBox_show_result.Location = new System.Drawing.Point(12, 115);
+            this.richTextBox_show_result.Name = "richTextBox_show_result";
+            this.richTextBox_show_result.Size = new System.Drawing.Size(425, 522);
+            this.richTextBox_show_result.TabIndex = 5;
+            this.richTextBox_show_result.Text = "";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(443, 121);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 6;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(443, 200);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 7;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(530, 649);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.richTextBox_show_result);
+            this.Controls.Add(this.button_calculate);
+            this.Controls.Add(this.txtbox_weight);
+            this.Controls.Add(this.txtbox_height);
+            this.Controls.Add(this.label_weight);
+            this.Controls.Add(this.label_height);
+            this.Name = "Form1";
             this.Text = "Form1";
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
+
+        private System.Windows.Forms.Label label_height;
+        private System.Windows.Forms.Label label_weight;
+        private System.Windows.Forms.TextBox txtbox_height;
+        private System.Windows.Forms.TextBox txtbox_weight;
+        private System.Windows.Forms.Button button_calculate;
+        private System.Windows.Forms.RichTextBox richTextBox_show_result;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }
 
