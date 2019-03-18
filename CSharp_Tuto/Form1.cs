@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -118,5 +119,96 @@ namespace CSharp_Tuto
                 richTextBox_show_result.Text += "\r"; // 換行 
             }
         }
+
+        private void button_readCSV_Click(object sender, EventArgs e)
+        {
+            var Data = OpenCSV("./list.csv");
+
+            List<Human> People = new List<Human>();
+
+            foreach (DataRow row in Data.Rows)
+            {
+                var name = row[0];
+                var gender = row[1];
+                var height = row[2];
+                var weight = row[3];
+
+                Human person = new Human((string)name, (string)gender, Convert.ToDouble(weight), Convert.ToDouble(height));
+
+                People.Add(person);
+            }
+
+            foreach (var PERSON in People)
+            { 
+                richTextBox_show_result.Text += PERSON.Name;
+                richTextBox_show_result.Text += "\r"; // 換行 
+                richTextBox_show_result.Text += PERSON.GetBMI();
+                richTextBox_show_result.Text += "\r"; // 換行 
+                richTextBox_show_result.Text += Is_BMI_normal(PERSON.GetBMI());
+                richTextBox_show_result.Text += "\r"; // 換行 
+                richTextBox_show_result.Text += "======="; // 換行 
+                richTextBox_show_result.Text += "\r"; // 換行 
+            }
+        }
+
+
+
+        /// <summary>
+        /// 將CSV文件的數據讀取到DataTable中
+        /// </summary>
+        /// <param name="fileName">CSV文件路徑</param>
+        /// <returns>返回讀取了CSV數據的DataTable</returns>
+        public static DataTable OpenCSV(string filePath)
+        {
+            DataTable dt = new DataTable();
+            FileStream fs = new FileStream(filePath, System.IO.FileMode.Open, System.IO.FileAccess.Read);
+            StreamReader sr = new StreamReader(fs, Encoding.UTF8);
+            //StreamReader sr = new StreamReader(fs, encoding);
+            //string fileContent = sr.ReadToEnd();
+            //記錄每次讀取的一行記錄
+            string strLine = "";
+            //記錄每行記錄中的各字段內容
+            string[] aryLine = null;
+            string[] tableHead = null;
+            //標示列數
+            int columnCount = 0;
+            //標示是否是讀取的第一行
+            bool IsFirst = true;
+            //逐行讀取CSV中的數據
+            while ((strLine = sr.ReadLine()) != null)
+            {
+                if (IsFirst == true)
+                {
+                    tableHead = strLine.Split(',');
+                    IsFirst = false;
+                    columnCount = tableHead.Length;
+                    //創建列
+                    for (int i = 0; i < columnCount; i++)
+                    {
+                        tableHead[i] = tableHead[i].Replace("\"", "");
+                        DataColumn dc = new DataColumn(tableHead[i]);
+                        dt.Columns.Add(dc);
+                    }
+                }
+                else
+                {
+                    aryLine = strLine.Split(',');
+                    DataRow dr = dt.NewRow();
+                    for (int j = 0; j < columnCount; j++)
+                    {
+                        dr[j] = aryLine[j].Replace("\"", "");
+                    }
+                    dt.Rows.Add(dr);
+                }
+            }
+            if (aryLine != null && aryLine.Length > 0)
+            {
+                dt.DefaultView.Sort = tableHead[2] + " " + "DESC";
+            }
+            sr.Close();
+            fs.Close();
+            return dt;
+        }
     }
+
 }
